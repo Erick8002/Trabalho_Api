@@ -112,3 +112,44 @@ app.post('/filmes', (req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
 }); 
+
+
+// PUT /api/produtos/:id - Atualizar produto
+app.put('/api/produtos/:id', (req, res) => {
+    // 1. Pegar ID da URL
+    const id = parseInt(req.params.id);
+    
+    // 2. Buscar produto no array
+    const produto = produtos.find(p => p.id === id);
+    
+    // 3. Verificar se existe
+    if (!produto) {
+        return res.status(404).json({ 
+            erro: "Produto não encontrado" 
+        });
+    }
+    
+    // 4. Extrair dados do body
+    const { nome, preco, categoria } = req.body;
+    
+    // 5. VALIDAÇÕES (igual ao POST!)
+    if (!nome || !preco || !categoria) {
+        return res.status(400).json({
+            erro: "Campos obrigatórios: nome, preco, categoria"
+        });
+    }
+    
+    if (typeof preco !== 'number' || preco <= 0) {
+        return res.status(400).json({
+            erro: "Preço deve ser um número positivo"
+        });
+    }
+    
+    // 6. Atualizar campos do produto
+    produto.nome = nome;
+    produto.preco = preco;
+    produto.categoria = categoria;
+    
+    // 7. Retornar produto atualizado com 200 OK
+    res.json(produto);
+});

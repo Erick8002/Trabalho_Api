@@ -505,6 +505,10 @@ json
 }
 ```
 
+* **Print no Postman:**
+
+![Print7](Prints/image7.png)
+
 ## - Exemplos de Requisição no Postman (PUT e DELETE)
 
 **Exemplo 06: Atualizar Filme (PUT)**

@@ -115,41 +115,62 @@ app.listen(PORT, () => {
 
 
 // PUT /api/produtos/:id - Atualizar produto
-app.put('/api/produtos/:id', (req, res) => {
+app.put('/filmes/:id', (req, res) => {
     // 1. Pegar ID da URL
     const id = parseInt(req.params.id);
-    
-    // 2. Buscar produto no array
-    const produto = produtos.find(p => p.id === id);
-    
+
+    // 2. Buscar filme
+    const filme = filmes.find(f => f.id === id);
+
     // 3. Verificar se existe
-    if (!produto) {
-        return res.status(404).json({ 
-            erro: "Produto não encontrado" 
+    if (!filme) {
+        return res.status(404).json({
+            erro: "Filme não encontrado"
         });
     }
-    
-    // 4. Extrair dados do body
-    const { nome, preco, categoria } = req.body;
-    
-    // 5. VALIDAÇÕES (igual ao POST!)
-    if (!nome || !preco || !categoria) {
+
+    // 4. Pegar dados do body
+    const { titulo, diretor, ano, genero, nota } = req.body;
+
+    // 5. Validações
+    if (!titulo || !diretor || !ano || !genero || !nota) {
         return res.status(400).json({
-            erro: "Campos obrigatórios: nome, preco, categoria"
+            erro: "Todos os campos são obrigatórios"
         });
     }
-    
-    if (typeof preco !== 'number' || preco <= 0) {
+
+    if (typeof ano !== 'number' || typeof nota !== 'number') {
         return res.status(400).json({
-            erro: "Preço deve ser um número positivo"
+            erro: "Ano e nota devem ser números"
         });
     }
-    
-    // 6. Atualizar campos do produto
-    produto.nome = nome;
-    produto.preco = preco;
-    produto.categoria = categoria;
-    
-    // 7. Retornar produto atualizado com 200 OK
-    res.json(produto);
+
+    // 6. Atualizar filme
+    filme.titulo = titulo;
+    filme.diretor = diretor;
+    filme.ano = ano;
+    filme.genero = genero;
+    filme.nota = nota;
+
+    // 7. Retornar atualizado
+    res.json(filme);
+});
+
+app.delete('/filmes/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const index = filmes.findIndex(f => f.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({
+            erro: "Filme não encontrado"
+        });
+    }
+
+    const filmeRemovido = filmes.splice(index, 1);
+
+    res.json({
+        mensagem: "Filme removido com sucesso",
+        filme: filmeRemovido[0]
+    });
 });

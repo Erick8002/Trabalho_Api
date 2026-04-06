@@ -10,7 +10,9 @@
 * **Descrição:** Verifica o status de funcionamento da API.
 * **URL:** `http://localhost:8000/`
 * **Resposta de Sucesso (200 OK):**
-```json
+```
+json
+
 {
   "mensagem": "Manipulação de filmes",
   "status": "sucesso",
@@ -24,7 +26,9 @@
 * **URL:** `http://localhost:8000/info`
 * **Resposta de Sucesso (200 OK):**
 
-```json
+```
+json
+
 {
   "nome": "Api de Filmes",
   "versao": "1.0.0",
@@ -39,7 +43,9 @@
 * **Query Params:** pagina, limite, titulo, genero, diretor, min_nota, max_nota, ordem.
 * **Resposta de Sucesso (200 OK):**
 
-```json
+```
+json
+
 {
   "dados": [
     {
@@ -65,7 +71,9 @@
 * **URL:** `http://localhost:8000/filmes/id/1`
 * **Resposta de Sucesso (200 OK):**
 
-```json
+```
+json
+
 {
   "id": 1,
   "titulo": "O Poderoso Chefão",
@@ -86,7 +94,9 @@
 * **URL:** `http://localhost:8000/filmes`
 * **Corpo da Requisição (Body JSON):**
 
-```json
+```
+json
+
 {
   "titulo": "Interestelar",
   "diretor": "Christopher Nolan",
@@ -99,7 +109,9 @@
 
 * **Resposta de Sucesso (201 Created):**
 
-```json
+```
+json
+
 
 {
   "id": 11,
@@ -124,7 +136,8 @@
 * **Configuração: Selecionar Body > raw > JSON.** 
 * **Body enviado:** 
 
-```json
+```
+json
 
 {
   "titulo": "Duna: Parte Dois",
@@ -144,7 +157,9 @@
 * **Objetivo:** Listar filmes do gênero "Crime" com nota mínima 8.8, ordenados do ID maior para o menor.
 * **Resultado:** 
 
-``` json
+``` 
+json
+
 
 {
   "dados": [
@@ -181,7 +196,8 @@
 * **Objetivo:** Retornar apenas os 5 primeiros filmes cadastrados.
 * **Resultado:** 
 
-``` json
+``` 
+json
 
 {
   "dados": [
@@ -242,7 +258,8 @@
 * **Objetivo:** Retornar os detalhes específicos do filme que possui o ID 2.
 * **Resultado:** 
 
-``` json
+``` 
+json
 
 {
   "id": 2,
@@ -261,7 +278,8 @@
 * **URL:** `http://localhost:8000/filmes`
 * **Body enviado (Erro proposital - Nota como texto):** 
 
-``` json    
+``` 
+json    
 
 {
   "titulo": "Filme Teste",
@@ -296,7 +314,8 @@
 * **URL:** `http://localhost:8000/filmes`
 * **Body enviado:** 
 
-``` json
+``` 
+json
 
 {
   "titulo": "Oppenheimer",
@@ -430,3 +449,109 @@ const limiteNum = Math.max(1, parseInt(limite) || 10);
 ```
 
 * **Por que é importante:** Torna a API mais "inteligente" e evita que o servidor tente processar páginas inexistentes (ex: página -5).
+
+## - PUT
+
+### *** [PUT] / filmes/id/:id ***
+
+* **Descrição:** Atualiza completamente os dados de um filme existente a partir do seu ID.
+* **URL:** `http://localhost:8000/filmes/id/5`
+* **Corpo da Requisição (Body JSON):**
+
+```
+json
+
+{
+  "titulo": "Interestelar (Atualizado)",
+  "diretor": "Christopher Nolan",
+  "ano": 2014,
+  "genero": "Ficção Científica",
+  "nota": 9.0
+}
+```
+
+* **Resposta de Sucesso (200 OK): ** 
+
+```
+json
+
+{
+  "id": 5,
+  "titulo": "Interestelar (Atualizado)",
+  "diretor": "Christopher Nolan",
+  "ano": 2014,
+  "genero": "Ficção Científica",
+  "nota": 9.0
+}
+```
+
+* **Print do Postman:**
+
+![Print6](/Prints/image6.png)
+
+## - DELETE
+
+### *** [DELETE] / filmes/id/:id ***
+
+* **Descrição:** Remove um filme do catálogo com base no seu ID.
+* **URL:** `http://localhost:8000/filmes/id/5`
+* **CoResposta de Sucesso (200 OK):**
+
+```
+json
+
+{
+  "mensagem": "Filme removido com sucesso!"
+}
+```
+
+## - Exemplos de Requisição no Postman (PUT e DELETE)
+
+**Exemplo 06: Atualizar Filme (PUT)**
+
+* **Método:** `PUT`
+* **URL:** `http://localhost:8000/filmes/id/5`
+* **Configuração:** Body > raw > JSON
+* **Body enviado:**
+
+```
+json
+
+{
+  "titulo": "Matrix Reloaded",
+  "diretor": "Lana Wachowski, Lilly Wachowski",
+  "ano": 2003,
+  "genero": "Ficção Científica",
+  "nota": 7.2
+}
+```
+
+* **Resposta de Sucesso (200 OK):**
+
+```
+json
+
+{
+  "id": 1,
+  "titulo": "Interestelar (Atualizado)",
+  "diretor": "Christopher Nolan",
+  "ano": 2014,
+  "genero": "Ficção Científica",
+  "nota": 9.0
+}
+```
+
+**Exemplo 07: Deletar Filme (DELETE)**
+
+* **Método:** `DELETE`
+* **URL:** `http://localhost:8000/filmes/id/5`
+* **Objetivo:** Remover o filme com ID 1 do sistema.
+* **Resultado:**
+
+```
+json
+
+{
+  "mensagem": "Filme removido com sucesso!"
+}
+```

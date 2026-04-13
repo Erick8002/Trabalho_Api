@@ -9,7 +9,7 @@ let filmes = [
     { id: 1, titulo: "O Poderoso Chefão", diretor: "Francis Ford Coppola", ano: 1972, genero: "Crime", nota: 9.2 },
     { id: 2, titulo: "Batman: O Cavaleiro das Trevas", diretor: "Christopher Nolan", ano: 2008, genero: "Ação", nota: 9.0 },
     { id: 3, titulo: "A Lista de Schindler", diretor: "Steven Spielberg", ano: 1993, genero: "Biografia", nota: 9.0 },
-    { id: 4, titulo: "Pulp Fiction", diretor: " ", ano: 1994, genero: "Crime", nota: 8.9 },
+    { id: 4, titulo: "Pulp Fiction", diretor: "Quentin Tarantino", ano: 1994, genero: "Crime", nota: 8.9 },
     { id: 5, titulo: "O Senhor dos Anéis: O Retorno do Rei", diretor: "Peter Jackson", ano: 2003, genero: "Aventura", nota: 9.0 },
     { id: 6, titulo: "Clube da Luta", diretor: "David Fincher", ano: 1999, genero: "Drama", nota: 8.8 },
     { id: 7, titulo: "A Origem", diretor: "Christopher Nolan", ano: 2010, genero: "Ficção Científica", nota: 8.8 },
@@ -115,7 +115,7 @@ app.listen(PORT, () => {
 
 
 // PUT /api/produtos/:id - Atualizar produto
-app.put('/filmes/:id', (req, res) => {
+app.put('/filmes/id/:id', (req, res) => {
     // 1. Pegar ID da URL
     const id = parseInt(req.params.id);
 
@@ -156,7 +156,7 @@ app.put('/filmes/:id', (req, res) => {
     res.json(filme);
 });
 
-app.delete('/filmes/:id', (req, res) => {
+app.delete('/filmes/id/:id', (req, res) => {
     const id = parseInt(req.params.id);
 
     const index = filmes.findIndex(f => f.id === id);

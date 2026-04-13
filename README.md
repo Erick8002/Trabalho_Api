@@ -556,6 +556,7 @@ json
 json
 
 {
-  "mensagem": "Filme removido com sucesso!"
+  "mensagem": "Filme removido com sucesso", 
+  filme: filmeRemovido[6]
 }
 ```
